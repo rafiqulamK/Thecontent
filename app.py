@@ -10,6 +10,9 @@ from content_calendar import ContentCalendar, ContentScheduler
 from analytics_dashboard import PerformanceAnalytics, CompetitiveIntelligence
 from madgicx_advanced import MetaAdsOptimizer, AudienceIntelligence, PerformanceOptimization
 from campaign_management import CampaignDashboard, MultiCampaignManager
+from copywriting_engine import PlagiarismDetector, ToneDetector, ReadabilityAnalyzer, ContentTemplates
+from lexi_advanced_features import EngagementScorer, BrandVoiceConsistency, GrammarChecker
+from omneky_advanced_features import MultiVariateTestingFramework, CreativeVariationGenerator, PerformanceBenchmarking, CreativeFatigueDetector
 
 # Page configuration
 st.set_page_config(
@@ -91,13 +94,45 @@ if 'generated_posts' not in st.session_state:
 
 if 'saved_posts' not in st.session_state:
     st.session_state.saved_posts = []
+if 'plagiarism_detector' not in st.session_state:
+    st.session_state.plagiarism_detector = PlagiarismDetector()
+
+if 'tone_detector' not in st.session_state:
+    st.session_state.tone_detector = ToneDetector()
+
+if 'readability_analyzer' not in st.session_state:
+    st.session_state.readability_analyzer = ReadabilityAnalyzer()
+
+if 'content_templates' not in st.session_state:
+    st.session_state.content_templates = ContentTemplates()
+
+if 'engagement_scorer' not in st.session_state:
+    st.session_state.engagement_scorer = EngagementScorer()
+
+if 'brand_voice' not in st.session_state:
+    st.session_state.brand_voice = BrandVoiceConsistency()
+
+if 'grammar_checker' not in st.session_state:
+    st.session_state.grammar_checker = GrammarChecker()
+
+if 'multivariate_testing' not in st.session_state:
+    st.session_state.multivariate_testing = MultiVariateTestingFramework()
+
+if 'creative_variation_gen' not in st.session_state:
+    st.session_state.creative_variation_gen = CreativeVariationGenerator()
+
+if 'performance_benchmarking' not in st.session_state:
+    st.session_state.performance_benchmarking = PerformanceBenchmarking()
+
+if 'fatigue_detector' not in st.session_state:
+    st.session_state.fatigue_detector = CreativeFatigueDetector()
 
 st.title("🤖 AI Content Generator Pro")
 st.markdown("**Complete Alternative to Omneky, Madgicx & Lexi AI**")
 st.markdown("Generate, optimize, and schedule content with competitive intelligence")
 
 # Main navigation tabs
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs([
     "🎯 Content Generator",
     "✍️ Copywriting Assistant",
     "🧪 A/B Testing Lab",
@@ -105,7 +140,9 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "📊 Analytics Dashboard",
     "🎯 Competitor Analysis",
     "📱 Meta Ads Optimizer",
-    "🚀 Campaign Manager"
+    "🚀 Campaign Manager",
+    "🔍 Lexi AI Advanced",
+    "🔬 Omneky Multivariate"
 ])
 
 # ==================== TAB 1: CONTENT GENERATOR ====================
@@ -1096,27 +1133,471 @@ with tab8:
 
 
 # ==================== FOOTER ====================
+
+# ==================== TAB 9: LEXI AI ADVANCED FEATURES ====================
+with tab9:
+    st.header("🔍 Lexi AI Advanced Features")
+    st.markdown("Plagiarism detection, tone analysis, readability scoring, and brand consistency")
+    
+    lexi_feature = st.selectbox(
+        "Select Advanced Feature",
+        ["Plagiarism Detection", "Tone Detection", "Readability Analysis", 
+         "Content Templates", "Engagement Scoring", "Brand Voice Consistency", "Grammar Check"]
+    )
+    
+    # Text input for analysis
+    text_to_analyze = st.text_area("Enter content to analyze:", height=150)
+    
+    if st.button("Analyze Content", key="lexi_analyze"):
+        if text_to_analyze.strip():
+            if lexi_feature == "Plagiarism Detection":
+                st.subheader("📋 Plagiarism Detection Results")
+                result = st.session_state.plagiarism_detector.detect_plagiarism(text_to_analyze)
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Originality Score", f"{result['originality_score']:.1f}/100")
+                with col2:
+                    st.metric("Plagiarism Risk", result['plagiarism_risk'])
+                with col3:
+                    st.metric("Risk Level", f"{result['risk_score']:.1f}/100")
+                
+                st.warning(result['recommendation'])
+                
+                if result['issues_found']:
+                    st.subheader("Issues Found:")
+                    for issue in result['issues_found']:
+                        st.write(f"• {issue}")
+            
+            elif lexi_feature == "Tone Detection":
+                st.subheader("🎭 Tone Detection Results")
+                tone_result = st.session_state.tone_detector.detect_tone(text_to_analyze)
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Detected Tone", tone_result['detected_tone'])
+                with col2:
+                    st.metric("Confidence", f"{tone_result['tone_confidence']*100:.1f}%")
+                with col3:
+                    st.metric("Description", tone_result['tone_description'])
+                
+                # Tone breakdown
+                st.subheader("Tone Score Breakdown")
+                tone_scores = tone_result['all_tones']
+                cols = st.columns(len(tone_scores))
+                for idx, (tone_type, score) in enumerate(tone_scores.items()):
+                    with cols[idx]:
+                        st.metric(tone_type.title(), f"{score:.1f}")
+                
+                # Adjust tone
+                target_tone = st.selectbox("Adjust to tone:", ["professional", "casual", "friendly", "urgent", "empathetic"])
+                if st.button("Adjust Tone"):
+                    adjusted = st.session_state.tone_detector.adjust_tone(text_to_analyze, target_tone)
+                    st.subheader(f"Adjusted to {target_tone}:")
+                    st.text_area("Adjusted content:", value=adjusted, disabled=True)
+            
+            elif lexi_feature == "Readability Analysis":
+                st.subheader("📖 Readability Analysis")
+                readability = st.session_state.readability_analyzer.analyze_readability(text_to_analyze)
+                
+                col1, col2, col3, col4 = st.columns(4)
+                with col1:
+                    st.metric("Word Count", readability['word_count'])
+                with col2:
+                    st.metric("Flesch Reading Ease", f"{readability['flesch_reading_ease']:.1f}")
+                with col3:
+                    st.metric("Grade Level", f"{readability['flesch_kincaid_grade']:.1f}")
+                with col4:
+                    st.metric("Readability Score", readability['readability_score'])
+                
+                st.info(f"**Level:** {readability['readability_level']}")
+                
+                st.subheader("📊 Reading Metrics")
+                metrics_cols = st.columns(3)
+                with metrics_cols[0]:
+                    st.metric("Sentence Count", readability['sentence_count'])
+                with metrics_cols[1]:
+                    st.metric("Avg Words/Sentence", readability['avg_words_per_sentence'])
+                with metrics_cols[2]:
+                    st.metric("Avg Syllables/Word", readability['avg_syllables_per_word'])
+                
+                if readability['improvement_suggestions']:
+                    st.subheader("💡 Improvement Suggestions")
+                    for suggestion in readability['improvement_suggestions']:
+                        st.write(f"• {suggestion}")
+            
+            elif lexi_feature == "Content Templates":
+                st.subheader("📝 Content Templates")
+                templates = st.session_state.content_templates.list_templates()
+                selected_template = st.selectbox("Choose template:", templates)
+                
+                if selected_template:
+                    template_data = st.session_state.content_templates.get_template(selected_template)
+                    st.info(f"**Structure:** {template_data.get('structure', 'N/A')}")
+                    st.markdown("**Template:**")
+                    st.code(template_data.get('template', 'N/A'), language="text")
+                    
+                    # Template variables
+                    st.subheader("Fill in variables:")
+                    variables = {}
+                    template_text = template_data.get('template', '')
+                    
+                    # Extract variable placeholders
+                    import re
+                    placeholders = re.findall(r'\[([^\]]+)\]', template_text)
+                    for placeholder in set(placeholders):
+                        variables[placeholder] = st.text_input(f"{placeholder}:")
+                    
+                    if st.button("Generate from Template"):
+                        result = st.session_state.content_templates.apply_template(selected_template, variables)
+                        st.success("Generated content:")
+                        st.text_area("Result:", value=result, height=200)
+            
+            elif lexi_feature == "Engagement Scoring":
+                st.subheader("⚡ Engagement Scoring")
+                engagement = st.session_state.engagement_scorer.score_engagement(text_to_analyze)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Overall Engagement Score", f"{engagement['engagement_score']:.1f}/100")
+                    st.info(f"**Level:** {engagement['engagement_level']}")
+                
+                with col2:
+                    st.subheader("Component Scores")
+                    for component, score in engagement['component_scores'].items():
+                        st.metric(component.replace('_', ' ').title(), f"{score:.1f}/100")
+                
+                st.subheader("📈 Strengths")
+                for strength in engagement['strengths']:
+                    st.success(f"✓ {strength}")
+                
+                st.subheader("⚠️ Weaknesses")
+                for weakness in engagement['weaknesses']:
+                    st.warning(f"✗ {weakness}")
+                
+                st.subheader("💡 Improvement Tips")
+                for tip in engagement['improvement_tips']:
+                    st.write(f"• {tip}")
+            
+            elif lexi_feature == "Brand Voice Consistency":
+                st.subheader("🎨 Brand Voice Consistency")
+                
+                brand_type = st.selectbox(
+                    "Select brand voice type:",
+                    ["corporate", "startup", "friendly", "luxury", "educational"]
+                )
+                
+                st.session_state.brand_voice.set_brand_attributes(brand_type)
+                
+                consistency = st.session_state.brand_voice.analyze_brand_consistency(text_to_analyze)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Overall Consistency", f"{consistency['overall_consistency_score']:.1f}/100")
+                    st.info(f"**Level:** {consistency['consistency_level']}")
+                
+                with col2:
+                    st.subheader("Component Scores")
+                    for component, score in consistency['component_scores'].items():
+                        st.metric(component.replace('_', ' ').title(), f"{score:.1f}/100")
+                
+                if consistency['issues']:
+                    st.subheader("⚠️ Issues Found")
+                    for issue in consistency['issues']:
+                        st.warning(f"• {issue}")
+                
+                st.subheader("🎯 Brand Attributes")
+                for key, value in consistency['brand_attributes'].items():
+                    if key not in ['avoid', 'examples']:
+                        st.write(f"**{key}:** {value}")
+            
+            elif lexi_feature == "Grammar Check":
+                st.subheader("✍️ Grammar & Style Check")
+                grammar = st.session_state.grammar_checker.check_grammar(text_to_analyze)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Grammar Score", f"{grammar['score']:.1f}/100")
+                with col2:
+                    st.metric("Issues Found", grammar['issues_found'])
+                
+                if grammar['issues']:
+                    st.subheader("Issues Detected:")
+                    for issue in grammar['issues']:
+                        st.warning(f"• {issue}")
+                
+                if grammar['suggestions']:
+                    st.subheader("Suggestions:")
+                    for suggestion in grammar['suggestions']:
+                        st.info(f"💡 {suggestion}")
+
+
+# ==================== TAB 10: OMNEKY MULTIVARIATE TESTING ====================
+with tab10:
+    st.header("🔬 Omneky Multivariate Testing")
+    st.markdown("Advanced A/B/N testing framework with statistical analysis")
+    
+    testing_mode = st.selectbox(
+        "Select Mode",
+        ["Create New Test", "View Test Results", "Creative Variations", "Performance Benchmarking", "Fatigue Detection"]
+    )
+    
+    if testing_mode == "Create New Test":
+        st.subheader("📊 Create Multivariate Test")
+        
+        test_name = st.text_input("Test Name:")
+        hypothesis = st.text_area("Test Hypothesis:", height=80)
+        
+        num_variants = st.slider("Number of Variants", 2, 5, 3)
+        
+        variants = {}
+        st.markdown("### Variant Content")
+        var_cols = st.columns(num_variants)
+        
+        for i in range(num_variants):
+            with var_cols[i % num_variants]:
+                variants[f"Variant {i+1}"] = st.text_area(f"Variant {i+1} Content:", height=100, key=f"var_{i}")
+        
+        if st.button("Create Test"):
+            if test_name and all(variants.values()):
+                test = st.session_state.multivariate_testing.create_multivariate_test(
+                    test_name, variants, hypothesis
+                )
+                st.success(f"Test created: {test['id']}")
+                st.info(f"Minimum sample size: {test['minimum_sample_size']:,}")
+                st.info(f"Estimated duration: {test['expected_duration_days']:.1f} days")
+                st.session_state.current_test_id = test['id']
+    
+    elif testing_mode == "View Test Results":
+        st.subheader("📈 Test Results & Analysis")
+        
+        # Simulate test data (in production, this would be from database)
+        test_id = st.text_input("Enter Test ID:", value=st.session_state.get('current_test_id', ''))
+        
+        if test_id and st.button("Load Results"):
+            # Simulate recording variant performance
+            test = st.session_state.multivariate_testing.active_tests.get(test_id, {})
+            if not test:
+                st.warning("Test not found. Creating sample test...")
+                # Create sample for demo
+                test = st.session_state.multivariate_testing.create_multivariate_test(
+                    "Sample Test",
+                    {"Variant A": "Sample A", "Variant B": "Sample B"},
+                    "Testing messaging approach"
+                )
+                test_id = test['id']
+            
+            # Record sample performance
+            st.session_state.multivariate_testing.record_variant_performance(test_id, 0, 1000, 45, 15, 600)
+            st.session_state.multivariate_testing.record_variant_performance(test_id, 1, 1000, 38, 10, 600)
+            
+            results = st.session_state.multivariate_testing.get_test_results(test_id)
+            
+            st.subheader(f"Test: {results['test_name']}")
+            st.info(f"Hypothesis: {results['hypothesis']}")
+            
+            # Winner announcement
+            st.subheader("🏆 Winner")
+            winner_col, lift_col, significance_col = st.columns(3)
+            
+            with winner_col:
+                st.metric("Winning Variant", results['winner'] or "TBD")
+            with lift_col:
+                st.metric("Lift vs Control", results['winner_lift'])
+            with significance_col:
+                st.metric("Statistical Significance", results['statistical_significance'])
+            
+            # Variant breakdown
+            st.subheader("📊 Variant Performance")
+            for variant in results['variant_results']:
+                with st.expander(f"{variant['variant_name']} - Efficiency Score: {variant['efficiency_score']}/100"):
+                    metric_cols = st.columns(6)
+                    with metric_cols[0]:
+                        st.metric("Impressions", f"{variant['impressions']:,}")
+                    with metric_cols[1]:
+                        st.metric("Clicks", f"{variant['clicks']:,}")
+                    with metric_cols[2]:
+                        st.metric("CTR", f"{variant['ctr']:.2f}%")
+                    with metric_cols[3]:
+                        st.metric("Conversions", f"{variant['conversions']:,}")
+                    with metric_cols[4]:
+                        st.metric("CVR", f"{variant['cvr']:.2f}%")
+                    with metric_cols[5]:
+                        st.metric("CPA", f"${variant['cpa']:.2f}")
+            
+            st.info(results['recommendation'])
+    
+    elif testing_mode == "Creative Variations":
+        st.subheader("🎨 Generate Creative Variations")
+        
+        product_name = st.text_input("Product Name:")
+        topic = st.text_input("Topic/Focus:")
+        num_variations = st.slider("Number of Variations", 2, 5, 3)
+        
+        if st.button("Generate Variations"):
+            if product_name and topic:
+                variations = st.session_state.creative_variation_gen.create_variation_set(
+                    product_name, topic, num_variations
+                )
+                
+                for idx, var in enumerate(variations, 1):
+                    with st.expander(f"**{var['name']}** - {var['testing_objective']}", expanded=(idx==1)):
+                        st.subheader("Headline")
+                        st.write(var['headline'])
+                        
+                        st.subheader("Body Copy")
+                        st.write(var['body_copy'])
+                        
+                        st.subheader("Call-to-Action")
+                        st.write(var['cta'])
+                        
+                        # Copy to clipboard option
+                        full_variation = f"{var['headline']}\n\n{var['body_copy']}\n\n{var['cta']}"
+                        st.code(full_variation)
+    
+    elif testing_mode == "Performance Benchmarking":
+        st.subheader("📊 Benchmark Your Performance")
+        
+        industry = st.selectbox(
+            "Select Industry",
+            ["ecommerce", "saas", "lead_generation", "retail"]
+        )
+        
+        # Input actual metrics
+        metric_cols = st.columns(5)
+        with metric_cols[0]:
+            ctr = st.number_input("CTR (%):", min_value=0.0, value=1.5, step=0.1)
+        with metric_cols[1]:
+            cvr = st.number_input("CVR (%):", min_value=0.0, value=2.5, step=0.1)
+        with metric_cols[2]:
+            cpc = st.number_input("CPC ($):", min_value=0.0, value=0.75, step=0.05)
+        with metric_cols[3]:
+            cpa = st.number_input("CPA ($):", min_value=0.0, value=30.0, step=1.0)
+        with metric_cols[4]:
+            roas = st.number_input("ROAS:", min_value=0.0, value=3.5, step=0.1)
+        
+        if st.button("Compare to Benchmarks"):
+            actual_metrics = {
+                "ctr": ctr,
+                "cvr": cvr,
+                "cpc": cpc,
+                "cpa": cpa,
+                "roas": roas
+            }
+            
+            comparison = st.session_state.performance_benchmarking.compare_to_benchmarks(
+                actual_metrics, industry
+            )
+            
+            st.subheader(f"Performance vs {industry.upper()} Benchmarks")
+            st.info(f"Overall Performance: {comparison['overall_performance_vs_benchmark']}")
+            
+            # Detailed comparison
+            for metric, data in comparison['metrics_comparison'].items():
+                with st.expander(f"{metric.upper()} - {data['performance']}"):
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        st.metric("Your Performance", f"{data['actual']:.2f}")
+                    with col2:
+                        st.metric("Industry Benchmark", f"{data['benchmark']:.2f}")
+                    with col3:
+                        st.metric("Variance", data['variance'])
+            
+            st.subheader("Recommendations")
+            for rec in comparison['recommendations']:
+                st.info(f"💡 {rec}")
+    
+    elif testing_mode == "Fatigue Detection":
+        st.subheader("😴 Creative Fatigue Detection")
+        st.markdown("Monitor creative performance decline and fatigue signals")
+        
+        # Simulate metrics history
+        st.markdown("### Enter Performance Data Over Time")
+        
+        period_cols = st.columns(2)
+        with period_cols[0]:
+            num_periods = st.slider("Number of time periods:", 2, 5, 3)
+        
+        metrics_history = []
+        
+        for period in range(num_periods):
+            with st.expander(f"Period {period + 1}", expanded=(period==0)):
+                metric_cols = st.columns(4)
+                with metric_cols[0]:
+                    ctr = st.number_input(f"CTR % (Period {period+1}):", min_value=0.0, value=1.5 if period==0 else 1.2-period*0.15, step=0.1, key=f"ctr_{period}")
+                with metric_cols[1]:
+                    cvr = st.number_input(f"CVR % (Period {period+1}):", min_value=0.0, value=2.5 if period==0 else 2.0-period*0.2, step=0.1, key=f"cvr_{period}")
+                with metric_cols[2]:
+                    cpc = st.number_input(f"CPC $ (Period {period+1}):", min_value=0.0, value=0.75 if period==0 else 0.75+period*0.1, step=0.05, key=f"cpc_{period}")
+                with metric_cols[3]:
+                    frequency = st.number_input(f"Avg Frequency (Period {period+1}):", min_value=0.0, value=2.5 if period==0 else 2.5+period*0.5, step=0.1, key=f"freq_{period}")
+                
+                metrics_history.append({
+                    "ctr": ctr,
+                    "cvr": cvr,
+                    "cpc": cpc,
+                    "avg_frequency": frequency
+                })
+        
+        if st.button("Analyze Fatigue"):
+            if len(metrics_history) >= 2:
+                fatigue = st.session_state.fatigue_detector.detect_fatigue(metrics_history)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    fatigue_level = fatigue['fatigue_level']
+                    fatigue_color = {
+                        "Critical": "🔴",
+                        "High": "🟠",
+                        "Moderate": "🟡",
+                        "Low": "🟢"
+                    }
+                    st.metric("Fatigue Level", f"{fatigue_color.get(fatigue_level, '⚪')} {fatigue_level}")
+                
+                with col2:
+                    st.info(fatigue['recommendation'])
+                
+                st.subheader("📊 Fatigue Indicators")
+                indicator_cols = st.columns(4)
+                indicators = fatigue['indicators']
+                
+                with indicator_cols[0]:
+                    st.metric("CTR Decline", f"{indicators['ctr_decline']:.1f}%")
+                with indicator_cols[1]:
+                    st.metric("CVR Decline", f"{indicators['cvr_decline']:.1f}%")
+                with indicator_cols[2]:
+                    st.metric("Cost Increase", f"{indicators['cost_increase']:.1f}%")
+                with indicator_cols[3]:
+                    st.metric("Avg Frequency", f"{indicators['frequency_fatigue']:.2f}x")
+                
+                st.subheader("🎯 Recommended Actions")
+                for i, action in enumerate(fatigue['suggested_actions'], 1):
+                    st.write(f"{i}. {action}")
 st.divider()
 
 footer_cols = st.columns(3)
 
 with footer_cols[0]:
-    st.markdown("**📚 Features:**")
-    st.markdown("✅ Content Generation")
-    st.markdown("✅ Copywriting Engine")
-    st.markdown("✅ A/B Testing")
+    st.markdown("**📚 Core Features:**")
+    st.markdown("✅ Content Generation (Omneky)")
+    st.markdown("✅ Copywriting Engine (Lexi AI)")
+    st.markdown("✅ A/B Testing Framework")
+    st.markdown("✅ Madgicx Campaign Mgmt")
 
 with footer_cols[1]:
-    st.markdown("**🛠️ Tools:**")
-    st.markdown("✅ Content Calendar")
-    st.markdown("✅ Analytics")
-    st.markdown("✅ Competitor Analysis")
+    st.markdown("**🔬 Advanced Tools:**")
+    st.markdown("✅ Multivariate Testing")
+    st.markdown("✅ Plagiarism Detection")
+    st.markdown("✅ Tone Detection")
+    st.markdown("✅ Creative Variations")
+    st.markdown("✅ Fatigue Detection")
 
 with footer_cols[2]:
-    st.markdown("**🎯 Models:**")
-    st.markdown("- Gemma 2B (Recommended)")
-    st.markdown("- Mistral")
-    st.markdown("- Llama2")
+    st.markdown("**📊 Analytics & Insights:**")
+    st.markdown("✅ Readability Analysis")
+    st.markdown("✅ Engagement Scoring")
+    st.markdown("✅ Brand Consistency")
+    st.markdown("✅ Performance Benchmarking")
 
 st.markdown("---")
 st.markdown("🤖 **AI Content Generator Pro** | Complete Alternative to Omneky, Madgicx & Lexi AI")

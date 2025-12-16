@@ -3,6 +3,8 @@ Competitor Analysis & Market Intelligence Engine
 For Omneky-like competitive positioning and Madgicx-like market insights
 """
 
+from typing import Dict, List
+
 class CompetitorAnalysis:
     """Analyze competitor content and market positioning"""
     
