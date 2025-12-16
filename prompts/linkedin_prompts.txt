@@ -1,0 +1,46 @@
+# LinkedIn Prompt Templates
+
+## Professional Insight
+Create a LinkedIn post sharing a professional insight about {topic}.
+Structure:
+1. Personal experience or observation
+2. Key insight or learning
+3. Relevant statistics or data
+4. Call to action (share your thoughts, connect)
+5. Professional tone throughout
+
+## Thought Leadership
+Write a thought leadership post about {topic}.
+Include:
+1. Strong opening hook
+2. Unique perspective or contrarian take
+3. 3-5 key points
+4. Industry context
+5. Ask for comments/discussion
+
+## Career Advice
+Create a LinkedIn post offering career advice about {topic}.
+Format:
+1. Relatable problem or situation
+2. 3 actionable tips
+3. Personal example or story
+4. Encouragement/motivation
+5. Invite conversation
+
+## Company Culture
+Write a post about company culture/achievement related to {topic}.
+Should include:
+1. What the company did
+2. Impact and results
+3. Team appreciation
+4. Values aligned with action
+5. Pride in accomplishment
+
+## Educational Content
+Create an educational LinkedIn post about {topic}.
+Provide:
+1. Clear topic introduction
+2. 3-5 learning points
+3. Actionable takeaways
+4. Resource link if available
+5. Encourage sharing and learning

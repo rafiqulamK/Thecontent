@@ -1,0 +1,41 @@
+# Twitter Prompt Templates
+
+## Professional Tone
+Create a Twitter post about {topic}.
+Tone: Professional
+Requirements:
+1. Keep it under 280 characters
+2. Include 1-2 relevant hashtags
+3. Add a clear value proposition
+4. Include a call to action (retweet, reply, click link)
+
+## Casual Tone
+Write a casual Twitter post about {topic}.
+Make it conversational and friendly.
+Include an emoji or two.
+Keep it under 280 characters.
+Add relevant hashtags.
+
+## Funny Tone
+Create a funny/humorous Twitter post about {topic}.
+Make it witty and entertaining.
+Keep it under 280 characters.
+Use clever wordplay if possible.
+End with a relevant hashtag.
+
+## Viral Potential
+Write a Twitter post designed to go viral about {topic}.
+Ingredients for a viral tweet:
+1. Surprising or controversial element
+2. Highly relatable content
+3. Emoji usage
+4. Engaging ask (question or call to action)
+5. Under 280 characters
+
+## Thread Starter
+Create a compelling opening tweet for a thread about {topic}.
+This should:
+1. Hook the reader immediately
+2. Promise value in the thread
+3. Include "🧵" emoji
+4. Keep it engaging to encourage clicks

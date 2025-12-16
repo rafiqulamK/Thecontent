@@ -1,0 +1,7 @@
+ollama
+streamlit
+schedule
+requests
+python-dotenv
+pandas
+numpy

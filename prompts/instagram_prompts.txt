@@ -1,0 +1,46 @@
+# Instagram Prompt Templates
+
+## Caption with Hashtags
+Create an Instagram caption about {topic}.
+Requirements:
+1. Engaging opening line
+2. 2-3 sentences of body content
+3. Call to action (like, comment, DM, shop link)
+4. 15-30 relevant hashtags
+5. Use emojis naturally
+
+## Story Post
+Write an Instagram story caption about {topic}.
+Make it:
+1. Short and punchy
+2. Conversational
+3. Include relevant stickers/emojis
+4. Include 3-5 hashtags
+5. Ask an engaging question
+
+## Carousel Post
+Create a caption for a carousel/carousel post about {topic}.
+Should include:
+1. Hook in first sentence
+2. Tease the carousel content
+3. "Swipe to see more" reference
+4. Call to action at the end
+5. 10-20 hashtags
+
+## Behind the Scenes
+Write a casual behind-the-scenes Instagram caption about {topic}.
+Keep it:
+1. Authentic and personal
+2. Conversational
+3. Include relevant emojis
+4. Share something interesting
+5. End with an engaging question
+
+## Reels Caption
+Create a caption for an Instagram Reel about {topic}.
+Make it:
+1. Attention-grabbing
+2. Describe the reel content
+3. Include a clear CTA
+4. Use trending hashtags
+5. Keep it authentic
